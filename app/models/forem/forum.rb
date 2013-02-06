@@ -16,7 +16,7 @@ module Forem
 
     validates :category, :title, :description, :presence => true
 
-    attr_accessible :category_id, :title, :description, :moderator_ids, :forem_protected, :logo, :icon
+    attr_accessible :category_id, :title, :description, :moderator_ids, :forem_protected, :logo, :icon, :sequence
     
     has_attached_file :logo,
       :path           => '/:id/:style.:extension',
@@ -45,10 +45,12 @@ module Forem
 
     def moderator?(user)
       user && (user.forem_group_ids & moderator_ids).any?
+
+      
     end
-    
+
     private
-    
+
     def assign_mod_group
       g = Forem::Group.find_by_name category.name + Forem::Group::ADMIN_POSTFIX
       Forem::ModeratorGroup.create(group_id: g.id, forum_id: id)

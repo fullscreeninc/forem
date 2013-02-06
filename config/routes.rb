@@ -35,6 +35,8 @@ Forem::Engine.routes.draw do
     end
 
     resources :categories
+    match 'categories/:id/sort' => 'categories#sort_forums'
+
     resources :topics do
       member do
         put :toggle_hide

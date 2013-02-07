@@ -50,5 +50,14 @@ module Forem
         end
       end.html_safe if content.present?
     end
+  
+    def ordering_class(category, user)
+      if category.moderator?(user) || user.forem_admin? || user.forem_mod?
+        ' forums-ordering'
+      else
+        ''
+      end
+    end
+
   end
 end

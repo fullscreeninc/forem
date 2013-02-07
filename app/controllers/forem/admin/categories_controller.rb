@@ -42,19 +42,13 @@ module Forem
       end
 
       def sort_forums
-        # if can?(:moderate, @category.forums.first)
-          result = @category.custom_forums_sort(params['id'], params['forumIds'])
-        # end
-
-        render :json => result
-
-        # if can? :moderate, @forum
-        #   #current_user.forum_user.update_attributes(accepted_terms: true)
-        #   #current_user.touch  # update cache key
-        #   render :json => current_user.forum_user.accepted_terms
-        # else
-        #   render :json => !current_user.forum_user.accepted_terms
-        # end
+        user = current_user.forum_user
+        if @category.moderator?(user) || user.forem_admin? || user.forem_mod?
+          @category.custom_forums_sort(params['id'], params['forumIds'])
+          render :json => true
+        else
+          render :json => false
+        end
       end
 
       private

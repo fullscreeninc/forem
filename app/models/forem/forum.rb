@@ -45,8 +45,6 @@ module Forem
 
     def moderator?(user)
       user && (user.forem_group_ids & moderator_ids).any?
-
-      
     end
 
     private

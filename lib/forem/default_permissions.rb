@@ -45,7 +45,7 @@ module Forem
 
       unless method_defined?(:can_edit_forem_posts?)
         def can_edit_forem_posts?(forum)
-          return true if forem_admin? || forem_mod?
+          return true if forem_admin?
           false
         end
       end

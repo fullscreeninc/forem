@@ -7,7 +7,7 @@ module Forem
     extend FriendlyId
     friendly_id :title, :use => :slugged
 
-    belongs_to :category
+    belongs_to :category, :touch => true
 
     has_many :topics,     :dependent => :destroy
     has_many :posts,      :through => :topics, :dependent => :destroy
@@ -32,11 +32,7 @@ module Forem
     after_create :assign_mod_group
 
     def last_post_for(forem_user)
-      if forem_user && (forem_user.forem_admin? || moderator?(forem_user))
-        posts.last
-      else
-        last_visible_post(forem_user)
-      end
+      last_visible_post(forem_user)
     end
 
     def last_visible_post(forem_user)

@@ -8,4 +8,4 @@ gem 'paperclip'
 gem 'aws-sdk'
 gem 'sqlite3', :platform => :ruby
 gem 'pg'
-gem 'mysql2'
+# gem 'mysql2'

@@ -22,7 +22,7 @@ module Forem
     extend FriendlyId
     friendly_id :subject, :use => :slugged
 
-    attr_accessible :subject, :posts_attributes
+    attr_accessible :subject, :posts_attributes, :forum_id
     attr_accessible :subject, :posts_attributes, :pinned, :locked, :hidden, :forum_id, :as => :admin
 
     belongs_to :forum, :touch => true

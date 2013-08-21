@@ -9,6 +9,8 @@ module Forem
       if find_topic
         register_view
         @posts = @topic.posts
+        category = @forum.category
+        @forums = category.forums
         unless forem_admin_or_moderator?(@forum)
           @posts = @posts.approved_or_pending_review_for(forem_user)
         end

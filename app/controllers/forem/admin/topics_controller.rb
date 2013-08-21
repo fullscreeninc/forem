@@ -46,6 +46,14 @@ module Forem
       def forem_admin_or_moderator?(forum)
         forem_user && (forem_user.forem_admin? || forum.moderator?(forem_user))
       end
+
+      def change_forum
+        @topic.change_forum(params[:forum_id])
+        @topic.refresh
+        flash[:notice] = "You just changed the Forum of '#{@topic.title}'"
+        redirect_to forum_topic_path(@topic.forum, @topic)
+      end
+
       helper_method :forem_admin_or_moderator?
 
       private

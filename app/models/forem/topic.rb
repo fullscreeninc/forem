@@ -137,6 +137,10 @@ module Forem
       (self.posts.count.to_f / Forem.per_page.to_f).ceil
     end
 
+    def change_forum(new_forum_id)
+      update_attributes!(forum_id: new_forum_id)
+    end
+
     protected
     def set_first_post_user
       post = posts.first

@@ -48,9 +48,8 @@ module Forem
       end
 
       def change_forum
-        @topic.change_forum(params[:forum_id])
-        @topic.refresh
-        flash[:notice] = "You just changed the Forum of '#{@topic.title}'"
+        @topic.change_forum(params[:topic][:forum_id])
+        flash[:notice] = "You just changed the Forum of '#{@topic.subject}'"
         redirect_to forum_topic_path(@topic.forum, @topic)
       end
 

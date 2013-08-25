@@ -40,6 +40,7 @@ Forem::Engine.routes.draw do
         put :toggle_hide
         put :toggle_lock
         put :toggle_pin
+        put :change_forum
       end
     end
     

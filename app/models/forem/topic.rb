@@ -22,7 +22,7 @@ module Forem
     extend FriendlyId
     friendly_id :subject, :use => :slugged
 
-    attr_accessible :subject, :posts_attributes
+    attr_accessible :subject, :posts_attributes, :forum_id
     attr_accessible :subject, :posts_attributes, :pinned, :locked, :hidden, :forum_id, :as => :admin
 
     belongs_to :forum, :touch => true
@@ -135,6 +135,10 @@ module Forem
 
     def last_page
       (self.posts.count.to_f / Forem.per_page.to_f).ceil
+    end
+
+    def change_forum(new_forum_id)
+      update_attributes!(forum_id: new_forum_id)
     end
 
     protected
